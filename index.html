@@ -68,6 +68,12 @@ body.calm .chip,body.calm .inp,body.calm .mini,body.calm .toast{
   backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
 body.calm .card::after{animation:none !important;display:none}
 body.calm .view{animation:none !important}
+/* ==================== شاردنەوەی Powered by Netlify ==================== */
+a[href*="netlify.com"]{display:none !important}
+img[alt*="Netlify"]{display:none !important}
+#__netlify{display:none !important}
+.netlify-badge{display:none !important}
+@keyframes float{0%,100%{transform:translateY(0) scale(1)}50%{transform:translateY(26px) scale(1.08)}}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--acc),var(--acc2));border-radius:8px}
@@ -105,7 +111,7 @@ main{flex:1;margin-right:256px;padding:16px 22px 90px;position:relative}
   box-shadow:inset 0 0 20px color-mix(in srgb,var(--acc2) 8%,transparent)}
 #clockTime{font-size:21px;font-weight:800;font-variant-numeric:tabular-nums;
   color:var(--acc);text-shadow:0 0 14px var(--glowAcc)}
-#clockTime .ap{font-size:13px;color:var(--muted);text-shadow:none}
+#clockTime .ap{font-size:13.5px;color:var(--acc2);text-shadow:none;font-weight:800;margin-inline-start:5px}
 #clockDate{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
 .session{font-size:12px;color:var(--muted);border:1px dashed var(--line);border-radius:12px;padding:6px 10px}
 .session b{color:var(--acc2)}
@@ -254,11 +260,6 @@ ul.plist li{padding:7px 10px;border-bottom:1px dashed var(--line);font-size:13.5
 .p-foot{display:flex;justify-content:space-between;align-items:center;margin-top:6px;font-size:11px;color:#141414}
 .pf-mgr{font-weight:800;font-size:13px}
 .hint{color:var(--muted);font-size:12.5px;margin-top:10px}
-  /* شاردنەوەی Powered by Netlify */
-a[href*="netlify.com"]{display:none !important}
-img[alt*="Netlify"]{display:none !important}
-#__netlify{display:none !important}
-.netlify-badge{display:none !important}
 @page{size:A4 landscape;margin:5mm}
 @media print{
   body{background:#fff !important}
@@ -462,7 +463,7 @@ img[alt*="Netlify"]{display:none !important}
           <button class="btn btn-g" onclick="exportJSON()">💾 باکئەپی داتابەیس</button>
           <label class="btn btn-g">📥 هێنانەوەی باکئەپ<input type="file" id="fileBackup" accept=".json" hidden></label>
         </div>
-        <div class="lbl" style="margin-top:10px;text-align:center">PARWARDA 2026 — v2.5 Aurora Turbo</div>
+        <div class="lbl" style="margin-top:10px;text-align:center">PARWARDA 2026 — v2.6 Aurora</div>
       </div>
     </section>
   </main>
@@ -617,12 +618,12 @@ function applyTheme(){document.documentElement.dataset.theme=state.theme||'dark'
 function toggleTheme(){state.theme=(state.theme==='light')?'dark':'light';persist();applyTheme();beep('info');}
 function toggleSound(){state.sound=!state.sound;persist();$('#btnSound').textContent=state.sound?'🔔':'🔕';toast(state.sound?'دەنگ چالاکە':'دەنگ ناچالاکە','info');if(state.sound)beep('ok');}
 
-/* ================= کاتژمێر: ١٢ کاتژمێری + ڕێکەوت لەژێرەوە ================= */
+/* ================= کاتژمێر: ١٢ کاتژمێری + بەیانی/دوانیوڕۆ ================= */
 const sessionStart=Date.now();
 function tick(){
   const n=new Date();
-  let h=n.getHours();const m=n.getMinutes(),s=n.getSeconds();
-  const ap=h>=12?'پ.ن':'ب.ن';
+  const h=n.getHours(),m=n.getMinutes(),s=n.getSeconds();
+  const ap=h<12?'بەیانی':'دوانیوڕۆ';
   let h12=h%12;if(h12===0)h12=12;
   const p2=v=>String(v).padStart(2,'0');
   $('#clockTime').innerHTML=`${ku(p2(h12))}:${ku(p2(m))}:${ku(p2(s))} <span class="ap">${ap}</span>`;
@@ -1087,7 +1088,7 @@ function zoomPrint(d){printScale=Math.min(1.5,Math.max(.3,printScale+d));applyZo
 function applyZoom(){
   $('#zoomLbl').textContent=ku(Math.round(printScale*100)+'٪');
   const cur=parseFloat($('#printWrap').style.zoom)||1;
-  if(Math.abs(cur-printScale)<0.004)return;   /* zoom نەگۆڕاوە — هیچ کارێک مەکە */
+  if(Math.abs(cur-printScale)<0.004)return;
   $('#printWrap').style.zoom=printScale;
 }
 function fitPreview(){
@@ -1102,7 +1103,7 @@ function resetFont(){manualFont=null;renderPrint();toast('خۆگونجانی ز�
 function toggleGray(){$('#printWrap').classList.toggle('gray');$('#btnGray').classList.toggle('btn-d');}
 function setTextColor(v){state.print.textColor=v;persist();$('#printWrap').style.setProperty('--pText',v);}
 function setLineColor(v){state.print.lineColor=v;persist();$('#printWrap').style.setProperty('--pLine',v);}
-function setW(k,v){state.print[k]=Number(v);persist();fitCache.key='';  /* کاش پوچەڵ بکە */
+function setW(k,v){state.print[k]=Number(v);persist();fitCache.key='';
   const map={outerW:'--wOuter',headerW:'--wHeader',horizW:'--wHoriz',colW:'--wCol'};
   $('#printWrap').style.setProperty(map[k],v+'px');}
 function autoFitFont(){
@@ -1111,17 +1112,15 @@ function autoFitFont(){
   const f=Math.min(13, 330/halls, 330/days);
   return Math.max(4.5, Math.floor(f*2)/2);
 }
-/* ==== کاشی قەبارەی فۆنت — دووبارە کردنەوەی هەمان ڕێکخستن = ڕێندەری دەستبەجێ ==== */
+/* ==== کاشی قەبارەی فۆنت ==== */
 let fitCache={key:'',size:null};
 function fitKey(){
   return [examsSorted().length,state.halls.length,state.teachers.length,
     state.print.outerW,state.print.headerW,state.print.horizW,state.print.colW].join('|');
 }
-/* پێوانەی بەرز بە نۆرمالایزکردنی zoom — هەمیشه ڕاست */
 function measurePaperH(paper){
   return paper.getBoundingClientRect().height/(printScale||1);
 }
-/* خۆگونجانی خێرا: تەنها ٢ پێوانە — پێش یەکەم پەینت تەواو دەبێت */
 function smartFitFast(){
   const wrap=$('#printWrap');
   const paper=wrap.querySelector('.paper');
@@ -1141,7 +1140,6 @@ function smartFitFast(){
   paper.style.minHeight='794px';
   fitCache={key:fitKey(),size};
 }
-/* چاککردنی بێدەنگ لە پاشبنەمادا (دوای پەینت) — بۆ کاش */
 function microFit(){
   const wrap=$('#printWrap');
   const paper=wrap.querySelector('.paper');
@@ -1234,7 +1232,6 @@ function renderPrint(){
       <span>PARWARDA 2026</span>
     </footer>
   </section>`;
-  /* ⚡ خێرایی: کاش هەیە؟ ڕاستەوخۆ بە قەبارەی کۆتایی پیشان بدە — بێ هیچ پێوانە */
   const paper=wrap.querySelector('.paper');
   if(manualFont){
     if(paper)paper.style.minHeight='794px';
@@ -1243,9 +1240,9 @@ function renderPrint(){
     if(fitCache.key===k&&fitCache.size){
       wrap.style.setProperty('--printFont',fitCache.size+'px');
       if(paper)paper.style.minHeight='794px';
-      requestAnimationFrame(microFit);   /* چاککردنی بێدەنگ لە پاشبنەمادا */
+      requestAnimationFrame(microFit);
     }else{
-      smartFitFast();                    /* سەردانی یەکەم: تەنها ٢ پێوانە */
+      smartFitFast();
     }
   }
 }
