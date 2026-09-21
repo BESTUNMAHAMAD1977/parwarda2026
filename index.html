@@ -1258,6 +1258,24 @@ function renderAll(){renderDashboard();renderTeachers();renderHalls();renderSche
 applyTheme();
  $('#btnSound').textContent=state.sound?'🔔':'🔕';
 renderAll();tick();
+  /* ================= شاردنەوەی Powered by Netlify (بەهێزکراو) ================= */
+(function(){
+  const kill=()=>{
+    document.querySelectorAll('a[href*="netlify"]').forEach(a=>a.remove());
+    document.querySelectorAll('iframe[src*="netlify"],iframe[id*="netlify"],iframe[title*="Netlify"]').forEach(f=>f.remove());
+    const byId=document.getElementById('__netlify');if(byId)byId.remove();
+    document.querySelectorAll('[class*="netlify"],[id*="netlify"]').forEach(el=>el.remove());
+    document.querySelectorAll('body *').forEach(el=>{
+      if(el.children.length===0){
+        const t=(el.textContent||'').trim();
+        if(t==='Powered by Netlify'){const p=el.closest('a')||el.closest('div')||el.closest('span')||el;p.remove();}
+      }
+    });
+  };
+  kill();
+  setInterval(kill,1000);
+  new MutationObserver(()=>kill()).observe(document.documentElement,{childList:true,subtree:true});
+})();
   /* ================= شاردنەوەی Powered by Netlify ================= */
 (function(){
   const kill=()=>{
