@@ -715,8 +715,7 @@ function fileToDataURL(file,max=420){return new Promise(res=>{
  $('#fileMinLogo').addEventListener('change',async e=>{if(e.target.files[0]){state.school.ministryLogo=await fileToDataURL(e.target.files[0]);persist();renderSchool();refreshPrint();toast('لۆگۆی وەزارەت بارکرا');}});
  $('#fileSchLogo').addEventListener('change',async e=>{if(e.target.files[0]){state.school.logo=await fileToDataURL(e.target.files[0]);persist();renderSchool();refreshPrint();toast('لۆگۆی قوتابخانە بارکرا');}});
  $('#fileOwner').addEventListener('change',async e=>{if(e.target.files[0]){state.owner.photo=await fileToDataURL(e.target.files[0],320);persist();renderOwner();toast('وێنە بارکرا');}});
-function renderOwner(){const p=state.owner.photo;if(p){$('#ownerImg').src=p;$('#ownerImg').style.display='block';$('#ownerFallback').style.display='none';}}
-
+function renderOwner(){$('#ownerImg').src='owner.png';$('#ownerImg').style.display='block';$('#ownerFallback').style.display='none';}
 /* ================= مامۆستایان ================= */
 let teacherQuery='';
 function addTeacherRaw(name,spec){
