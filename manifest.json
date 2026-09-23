@@ -1,0 +1,11 @@
+{
+  "name": "PARWARDA 2026 — چاودێریی تاقیکردنەوەکان",
+  "short_name": "PARWARDA",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0f24",
+  "theme_color": "#0b0f24",
+  "icons": [
+    { "src": "https://cdn-icons-png.flaticon.com/512/201/201614.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
